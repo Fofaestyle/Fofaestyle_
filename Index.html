@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fofae Style - Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-area">
+      <img src="logo.png" alt="Fofae Style Logo" class="logo">
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="#contact">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Elegant Hijabs & Modest Fashion</h1>
+    <p>Style meets tradition at Fofae Style.</p>
+    <a href="#shop" class="btn">Shop Now</a>
+  </section>
+
+  <section class="shop" id="shop">
+    <h2>Shop Our Collection</h2>
+    <!-- A search bar could be placed here if needed -->
+    <div class="products" id="productList">
+      <!-- Example Product Card 1 -->
+      <div class="product-card">
+        <img src="product1.jpg" alt="Product 1">
+        <h3>Classic Silk Hijab</h3>
+        <p class="price">$29.99</p>
+        <button onclick="addToCart('Classic Silk Hijab', 29.99, 'product1.jpg')">Add to Cart</button>
+      </div>
+      <!-- Example Product Card 2 -->
+      <div class="product-card">
+        <img src="product2.jpg" alt="Product 2">
+        <h3>Modern Chiffon Scarf</h3>
+        <p class="price">$19.99</p>
+        <button onclick="addToCart('Modern Chiffon Scarf', 19.99, 'product2.jpg')">Add to Cart</button>
+      </div>
+      <!-- Additional product cards can be added here -->
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>WhatsApp: <a href="https://wa.me/9052081010" target="_blank">+90 520 810 10</a></p>
+    <p>Instagram: <a href="https://instagram.com/fofaestyle_" target="_blank">@fofaestyle_</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fofae Style. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Load initial cart count from localStorage
+    document.getElementById("cart-count").innerText = localStorage.getItem('cartCount') || 0;
+
+    // Function to add product to cart
+    function addToCart(name, price, image) {
+      // Retrieve existing cart from localStorage
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price, image });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      // Update cart count
+      localStorage.setItem('cartCount', cart.length);
+      document.getElementById("cart-count").innerText = cart.length;
+      alert(name + " has been added to your cart!");
+    }
+  </script>
+</body>
+</html>

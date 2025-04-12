@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fofae Style - Cart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-area">
+      <img src="logo.png" alt="Fofae Style Logo" class="logo">
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="#contact">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="cart-section">
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+    <div class="cart-summary">
+      <p>Total: $<span id="cartTotal">0.00</span></p>
+      <a href="checkout.html" class="btn">Proceed to Checkout</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fofae Style. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function loadCart() {
+      const cartItemsContainer = document.getElementById("cartItems");
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        cartItemsContainer.innerHTML += `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="item-info">
+              <h4>${item.name}</h4>
+              <p>$${item.price.toFixed(2)}</p>
+            </div>
+            <button onclick="removeFromCart(${index})">Remove</button>
+          </div>
+        `;
+      });
+      document.getElementById("cartTotal").innerText = total.toFixed(2);
+      document.getElementById("cart-count").innerText = cart.length;
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('cartCount', cart.length);
+      loadCart();
+    }
+
+    // Load cart when page loads
+    window.onload = loadCart;
+  </script>
+</body>
+</html>

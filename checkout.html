@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fofae Style - Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-area">
+      <img src="logo.png" alt="Fofae Style Logo" class="logo">
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="#contact">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="checkout-section">
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" required>
+
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" required>
+
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" required>
+
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <button type="submit" class="btn">Place Order</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fofae Style. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Update cart count in checkout header
+    document.getElementById("cart-count").innerText = localStorage.getItem('cartCount') || 0;
+
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      // In a real website, here you would send the order details to your server.
+      alert("Thank you for your order! We will deliver worldwide.");
+      // Clear cart after order is placed.
+      localStorage.removeItem('cart');
+      localStorage.setItem('cartCount', 0);
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
